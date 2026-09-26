@@ -1,0 +1,25 @@
+﻿{
+  "name": "velina-catalogo",
+  "version": "1.0.0",
+  "description": "Catálogo digital responsivo e elegante da Velina - Moda Feminina com atendimento via WhatsApp",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "velina",
+    "moda-feminina",
+    "catalogo",
+    "landing-page",
+    "railway"
+  ],
+  "author": "Luiz",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.21.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
