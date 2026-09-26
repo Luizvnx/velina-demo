@@ -17,10 +17,24 @@ app.use((req, res, next) => {
 app.get('/health', (req, res) => {
   res.status(200).json({
     status: 'ok',
-    app: 'Velina Catálogo',
+    app: 'Velina Catálogo Multi-Design',
+    options: {
+      option1: ['/', '/v1', '/opcao-1', '/velina-1'],
+      option2: ['/velina-2', '/v2', '/opcao-2']
+    },
     uptime: Math.floor(process.uptime()),
     timestamp: new Date().toISOString()
   });
+});
+
+// Rota explícita da Opção 2 (Velina - Aracaju / Mostarda & Creme)
+app.get(['/velina-2', '/velina-2/', '/v2', '/opcao-2'], (req, res) => {
+  res.sendFile(path.join(__dirname, 'velina-2.html'));
+});
+
+// Rota explícita da Opção 1 (Velina - Minimalista / Ouro & Carvão)
+app.get(['/velina-1', '/velina-1/', '/v1', '/opcao-1'], (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 // Servir arquivos estáticos com cache inteligente
@@ -37,7 +51,7 @@ app.use(express.static(__dirname, {
   }
 }));
 
-// Fallback para qualquer rota não mapeada
+// Fallback para qualquer rota não mapeada (direciona para a Opção 1)
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
@@ -46,8 +60,9 @@ app.get('*', (req, res) => {
 const server = app.listen(PORT, HOST, () => {
   console.log('====================================================');
   console.log(' ✨ Velina - Catálogo Digital pronto para produção');
-  console.log(` 🌐 Servidor ouvindo em http://${HOST}:${PORT}`);
-  console.log(` 🩺 Health Check em http://${HOST}:${PORT}/health`);
+  console.log(` 🌐 Opção 1 (Principal): http://${HOST}:${PORT}/`);
+  console.log(` 🌐 Opção 2:             http://${HOST}:${PORT}/velina-2`);
+  console.log(` 🩺 Health Check:        http://${HOST}:${PORT}/health`);
   console.log('====================================================');
 });
 
